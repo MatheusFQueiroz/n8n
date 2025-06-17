@@ -1,18 +1,25 @@
-version: "3.7"
+version: '3'
 
 services:
   n8n:
-    image: n8nio/n8n
-    restart: always
+    image: n8n/n8n
+    container_name: n8n
     ports:
-      - "5678:5678"
+      - 5678:5678
     environment:
+      - GENERIC_TIMEZONE=America/Sao_Paulo
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=cliick
       - N8N_BASIC_AUTH_PASSWORD=Cliick7467@2025
       - N8N_HOST=0.0.0.0
       - N8N_PORT=5678
       - N8N_PROTOCOL=http
-      - NODE_ENV=production
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=0.0.0.0
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=n8n
+      - DB_POSTGRESDB_PASSWORD=n8n
     volumes:
-      - ~/.n8n:/home/node/.n8n
+      - ~/.n8n:/root/.n8n
+    restart: always
